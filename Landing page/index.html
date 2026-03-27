@@ -1,0 +1,877 @@
+<html lang="vi" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SheLeads Digital Hub | Nâng tầm thương hiệu phụ nữ Tây Bắc</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:wght@700;800;900&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['Be Vietnam Pro', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+
+    .app-root {
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Ethnic pattern SVG background */
+    .ethnic-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 15H25L30 5Z' fill='%23E8792308'/%3E%3Cpath d='M30 45L35 55H25L30 45Z' fill='%23E8792308'/%3E%3Cpath d='M5 30L15 35V25L5 30Z' fill='%23E8792308'/%3E%3Cpath d='M45 30L55 35V25L45 30Z' fill='%23E8792308'/%3E%3C/svg%3E");
+    }
+
+    /* Animations */
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(232,121,35,0.3); }
+      50% { box-shadow: 0 0 40px rgba(232,121,35,0.6); }
+    }
+    @keyframes rotate-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes dash-draw {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes wave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .anim-float-up { animation: floatUp 0.8s ease-out both; }
+    .anim-float-in { animation: floatIn 0.7s ease-out both; }
+    .anim-scale-in { animation: scaleIn 0.6s ease-out both; }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+    .delay-7 { animation-delay: 0.7s; }
+    .delay-8 { animation-delay: 0.8s; }
+
+    .shimmer-text {
+      background: linear-gradient(90deg, #E87923 0%, #FFD700 25%, #E87923 50%, #FFD700 75%, #E87923 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .cta-btn {
+      animation: pulse-glow 2.5s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .service-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .service-card:hover {
+      transform: translateY(-12px);
+    }
+
+    .stat-card {
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      transform: scale(1.08);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Decorative diamond pattern */
+    .diamond-border {
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 8px,
+        #E87923 8px,
+        #E87923 10px,
+        transparent 10px,
+        transparent 18px
+      );
+      height: 3px;
+    }
+
+    .ethnic-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ethnic-divider::before,
+    .ethnic-divider::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E87923, transparent);
+    }
+
+    /* Floating decorative elements */
+    .float-decor {
+      position: absolute;
+      border: 2px solid rgba(232,121,35,0.15);
+      border-radius: 4px;
+      transform: rotate(45deg);
+      animation: rotate-slow 20s linear infinite;
+    }
+
+    .testimonial-card {
+      transition: all 0.4s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    /* Nav */
+    .nav-link {
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #E87923;
+      transition: width 0.3s;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Wave letter animation */
+    .wave-letter {
+      display: inline-block;
+      animation: wave 2s ease-in-out infinite;
+    }
+
+    .scroll-smooth { scroll-behavior: smooth; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body" style="background-color: #F5F1ED; color: #2D2416;">
+  <div class="app-root scroll-smooth" id="app-root">
+   <!-- Navigation -->
+   <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500" id="main-nav" style="background: rgba(245,241,237,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(232,121,35,0.15);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16 sm:h-20">
+      <a href="#hero" class="flex items-center gap-3 group">
+       <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center font-heading font-black text-lg sm:text-xl transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #E87923, #FFD700); color: #F5F1ED;">
+        SL
+       </div><span class="font-heading font-bold text-lg sm:text-xl hidden sm:block" style="color: #2D2416;" id="nav-title">SheLeads</span> </a>
+      <div class="hidden md:flex items-center gap-8">
+       <a href="#services" class="nav-link text-sm font-medium" style="color: #7A6F66;">Dịch vụ</a> <a href="#why-us" class="nav-link text-sm font-medium" style="color: #7A6F66;">Tại sao chọn chúng tôi</a> <a href="#impact" class="nav-link text-sm font-medium" style="color: #7A6F66;">Tác động</a> <a href="#testimonials" class="nav-link text-sm font-medium" style="color: #7A6F66;">Khách hàng</a> <a href="#contact" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105" style="background: #E87923; color: #F5F1ED;" id="nav-cta">Liên hệ ngay</a>
+      </div><button class="md:hidden p-2" onclick="toggleMobileMenu()" aria-label="Menu"> <i data-lucide="menu" style="color: #2D2416;" class="w-6 h-6"></i> </button>
+     </div>
+    </div><!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden" style="background: rgba(245,241,237,0.98); border-top: 1px solid rgba(232,121,35,0.15);">
+     <div class="px-6 py-4 flex flex-col gap-4">
+      <a href="#services" onclick="closeMobileMenu()" class="text-base font-medium py-2" style="color: #7A6F66;">Dịch vụ</a> <a href="#why-us" onclick="closeMobileMenu()" class="text-base font-medium py-2" style="color: #7A6F66;">Tại sao chọn chúng tôi</a> <a href="#impact" onclick="closeMobileMenu()" class="text-base font-medium py-2" style="color: #7A6F66;">Tác động</a> <a href="#testimonials" onclick="closeMobileMenu()" class="text-base font-medium py-2" style="color: #7A6F66;">Khách hàng</a> <a href="#contact" onclick="closeMobileMenu()" class="px-5 py-2.5 rounded-full text-sm font-semibold text-center" style="background: #E87923; color: #F5F1ED;">Liên hệ ngay</a>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="hero" class="relative overflow-hidden" style="min-height: 100%; display: flex; align-items: center;">
+    <!-- Background decorations -->
+    <div class="absolute inset-0 ethnic-pattern"></div>
+    <div class="float-decor w-16 h-16 top-20 right-10 opacity-30" style="animation-duration: 25s;"></div>
+    <div class="float-decor w-24 h-24 bottom-20 left-8 opacity-20" style="animation-duration: 30s; animation-direction: reverse;"></div>
+    <div class="float-decor w-10 h-10 top-40 left-1/4 opacity-25" style="animation-duration: 18s;"></div><!-- Large gradient orb -->
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-5" style="background: radial-gradient(circle, #E87923, transparent 70%); filter: blur(60px);"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-4" style="background: radial-gradient(circle, #1a6b4a, transparent 70%); filter: blur(50px);"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-0 w-full">
+     <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <!-- Left content -->
+      <div class="flex-1 text-center lg:text-left">
+       <div class="anim-float-up delay-1">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-6" style="background: rgba(232,121,35,0.1); color: #E87923; border: 1px solid rgba(232,121,35,0.3);"> <span class="w-2 h-2 rounded-full animate-pulse" style="background: #E87923;"></span> Đang triển khai tại Sơn La &amp; Tây Bắc </span>
+       </div>
+       <h1 class="font-heading font-black text-5xl sm:text-6xl lg:text-8xl leading-none mb-4 anim-float-up delay-2" id="hero-title"><span class="shimmer-text">SheLeads</span></h1>
+       <p class="text-xl sm:text-2xl lg:text-3xl font-light mb-6 anim-float-up delay-3" style="color: #7A6F66;" id="hero-subtitle">Digital Hub Tây Bắc</p>
+       <div class="diamond-border w-32 mx-auto lg:mx-0 mb-6 anim-float-up delay-4"></div>
+       <p class="text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0 anim-float-up delay-5" style="color: #6B6260;" id="hero-desc">Nâng tầm thương hiệu phụ nữ Tây Bắc bằng sức mạnh thiết kế đồ họa và mạng xã hội. Logo, bao bì, tem nhãn, biển hiệu — tất cả trong một giải pháp chi phí siêu tiết kiệm.</p>
+       <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start anim-float-up delay-6">
+        <a href="#contact" class="cta-btn inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-lg" style="background: linear-gradient(135deg, #E87923, #d06a1a); color: #F5F1ED;" id="hero-cta"> <i data-lucide="rocket" class="w-5 h-5"></i> <span>Liên hệ ngay</span> </a> <a href="#services" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105" style="border: 2px solid rgba(232,121,35,0.4); color: #E87923;"> <span>Khám phá dịch vụ</span> <i data-lucide="arrow-down" class="w-5 h-5"></i> </a>
+       </div><!-- Quick stats row -->
+       <div class="flex flex-wrap gap-6 sm:gap-10 mt-10 justify-center lg:justify-start anim-float-up delay-7">
+        <div>
+         <div class="text-2xl sm:text-3xl font-black" style="color: #E87923;">
+          10+
+         </div>
+         <div class="text-xs sm:text-sm" style="color: #7A6F66;">
+          Doanh nghiệp hỗ trợ
+         </div>
+        </div>
+        <div style="width: 1px; background: rgba(232,121,35,0.2);"></div>
+        <div>
+         <div class="text-2xl sm:text-3xl font-black" style="color: #E87923;">
+          100%
+         </div>
+         <div class="text-xs sm:text-sm" style="color: #7A6F66;">
+          Sản phẩm thực tế
+         </div>
+        </div>
+        <div style="width: 1px; background: rgba(232,121,35,0.2);"></div>
+        <div>
+         <div class="text-2xl sm:text-3xl font-black" style="color: #E87923;">
+          ∞
+         </div>
+         <div class="text-xs sm:text-sm" style="color: #7A6F66;">
+          Bản sắc Tây Bắc
+         </div>
+        </div>
+       </div>
+      </div><!-- Right visual - Decorative logo showcase -->
+      <div class="flex-1 relative anim-scale-in delay-4">
+       <div class="relative w-72 h-72 sm:w-96 sm:h-96 mx-auto">
+        <!-- Rotating border -->
+        <div class="absolute inset-0 rounded-3xl" style="border: 2px dashed rgba(232,121,35,0.3); animation: rotate-slow 30s linear infinite;"></div><!-- Central showcase -->
+        <div class="absolute inset-4 rounded-2xl flex flex-col items-center justify-center gap-4 p-6" style="background: linear-gradient(135deg, rgba(232,121,35,0.06), rgba(26,107,74,0.06)); border: 1px solid rgba(232,121,35,0.15); backdrop-filter: blur(10px);">
+         <!-- Mock logo display -->
+         <svg width="120" height="120" viewbox="0 0 120 120" class="mb-2">
+          <defs>
+           <lineargradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#E87923" />
+            <stop offset="100%" style="stop-color:#FFD700" />
+           </lineargradient>
+          </defs> <!-- Mountain shape --> <path d="M60 15 L95 85 H75 L60 55 L45 85 H25 Z" fill="url(#logoGrad)" opacity="0.9">
+           <animate attributename="opacity" values="0.7;1;0.7" dur="3s" repeatcount="indefinite" />
+          </path> <!-- Leaf/rice --> <ellipse cx="60" cy="95" rx="30" ry="8" fill="#1a6b4a" opacity="0.7" /> <!-- Star --> <circle cx="60" cy="35" r="4" fill="#FFD700">
+           <animate attributename="r" values="3;5;3" dur="2s" repeatcount="indefinite" />
+          </circle>
+         </svg>
+         <div class="text-center">
+          <div class="font-heading font-bold text-lg sm:text-xl" style="color: #E87923;">
+           Thiết kế bản sắc
+          </div>
+          <div class="text-xs sm:text-sm mt-1" style="color: #7A6F66;">
+           Logo • Bao bì • Tem nhãn • Biển hiệu
+          </div>
+         </div><!-- Floating mini cards -->
+         <div class="absolute -top-3 -right-3 px-3 py-1.5 rounded-lg text-xs font-bold" style="background: #E87923; color: #F5F1ED; animation: wave 3s ease-in-out infinite;">
+          Logo ✦
+         </div>
+         <div class="absolute -bottom-3 -left-3 px-3 py-1.5 rounded-lg text-xs font-bold" style="background: #1a6b4a; color: #F5F1ED; animation: wave 3s ease-in-out infinite 0.5s;">
+          Bao bì ✦
+         </div>
+         <div class="absolute top-1/2 -right-6 px-3 py-1.5 rounded-lg text-xs font-bold" style="background: #FFD700; color: #2D2416; animation: wave 3s ease-in-out infinite 1s;">
+          Tem nhãn
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section id="services" class="relative py-20 sm:py-28" style="background: linear-gradient(180deg, #F5F1ED, #EBE5DF);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4" style="background: rgba(232,121,35,0.1); color: #E87923;">DỊCH VỤ CỐT LÕI</span>
+      <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4" style="color: #2D2416;" id="services-title">Giải pháp nhận diện thương hiệu</h2>
+      <p class="text-base sm:text-lg max-w-2xl mx-auto" style="color: #7A6F66;">Bộ nhận diện thương hiệu số hoàn chỉnh, mang đậm bản sắc dân tộc Tây Bắc</p>
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Logo -->
+      <div class="service-card reveal rounded-2xl p-6 sm:p-8 text-center group cursor-pointer" style="background: linear-gradient(135deg, rgba(232,121,35,0.08), rgba(232,121,35,0.02)); border: 1px solid rgba(232,121,35,0.15);">
+       <div class="w-16 h-16 rounded-xl mx-auto mb-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #E87923, #d06a1a);">
+        <i data-lucide="palette" class="w-8 h-8" style="color: #F5F1ED;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-3" style="color: #2D2416;">Thiết kế Logo</h3>
+       <p class="text-sm leading-relaxed" style="color: #7A6F66;">Logo kết hợp họa tiết truyền thống Thái, Mông, Dao với phong cách hiện đại — độc đáo, chuyên nghiệp, dễ nhớ và bán được</p>
+       <div class="mt-4 w-full h-px" style="background: linear-gradient(90deg, transparent, rgba(232,121,35,0.3), transparent);"></div>
+       <div class="mt-4 flex flex-wrap gap-2 justify-center">
+        <span class="px-2 py-1 rounded text-xs" style="background: rgba(232,121,35,0.1); color: #E87923;">Họa tiết dân tộc</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(232,121,35,0.1); color: #E87923;">Vector</span>
+       </div>
+      </div><!-- Bao bì -->
+      <div class="service-card reveal rounded-2xl p-6 sm:p-8 text-center group cursor-pointer" style="background: linear-gradient(135deg, rgba(26,107,74,0.08), rgba(26,107,74,0.02)); border: 1px solid rgba(26,107,74,0.15);">
+       <div class="w-16 h-16 rounded-xl mx-auto mb-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #1a6b4a, #14533b);">
+        <i data-lucide="package" class="w-8 h-8" style="color: #F5F1ED;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-3" style="color: #2D2416;">Thiết kế Bao bì</h3>
+       <p class="text-sm leading-relaxed" style="color: #7A6F66;">Bao bì nông sản chuẩn thương mại, tăng sức cạnh tranh, chống bị ép giá</p>
+       <div class="mt-4 w-full h-px" style="background: linear-gradient(90deg, transparent, rgba(26,107,74,0.3), transparent);"></div>
+       <div class="mt-4 flex flex-wrap gap-2 justify-center">
+        <span class="px-2 py-1 rounded text-xs" style="background: rgba(26,107,74,0.1); color: #1a6b4a;">Nông sản</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(26,107,74,0.1); color: #1a6b4a;">Thủ công</span>
+       </div>
+      </div><!-- Tem nhãn -->
+      <div class="service-card reveal rounded-2xl p-6 sm:p-8 text-center group cursor-pointer" style="background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,215,0,0.02)); border: 1px solid rgba(255,215,0,0.15);">
+       <div class="w-16 h-16 rounded-xl mx-auto mb-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #FFD700, #e6c200);">
+        <i data-lucide="tag" class="w-8 h-8" style="color: #2D2416;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-3" style="color: #2D2416;">Tem nhãn sản phẩm</h3>
+       <p class="text-sm leading-relaxed" style="color: #7A6F66;">Tem nhãn đẹp mắt, chuẩn quy cách, sẵn sàng in ấn và dán lên sản phẩm</p>
+       <div class="mt-4 w-full h-px" style="background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);"></div>
+       <div class="mt-4 flex flex-wrap gap-2 justify-center">
+        <span class="px-2 py-1 rounded text-xs" style="background: rgba(255,215,0,0.1); color: #FFD700;">In ấn</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(255,215,0,0.1); color: #FFD700;">Quy cách</span>
+       </div>
+      </div><!-- Biển hiệu -->
+      <div class="service-card reveal rounded-2xl p-6 sm:p-8 text-center group cursor-pointer" style="background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(139,92,246,0.02)); border: 1px solid rgba(139,92,246,0.15);">
+       <div class="w-16 h-16 rounded-xl mx-auto mb-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110" style="background: linear-gradient(135deg, #8B5CF6, #7c3aed);">
+        <i data-lucide="store" class="w-8 h-8" style="color: #F5F1ED;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-3" style="color: #2D2416;">Biển hiệu cửa hàng</h3>
+       <p class="text-sm leading-relaxed" style="color: #7A6F66;">Thiết kế biển bảng quảng cáo, biển hiệu cửa hàng bắt mắt, chuyên nghiệp</p>
+       <div class="mt-4 w-full h-px" style="background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent);"></div>
+       <div class="mt-4 flex flex-wrap gap-2 justify-center">
+        <span class="px-2 py-1 rounded text-xs" style="background: rgba(139,92,246,0.1); color: #8B5CF6;">Ngoài trời</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(139,92,246,0.1); color: #8B5CF6;">Trong nhà</span>
+       </div>
+      </div>
+     </div><!-- Bonus: Digital channels -->
+     <div class="mt-12 reveal rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6" style="background: linear-gradient(135deg, rgba(232,121,35,0.05), rgba(26,107,74,0.05)); border: 1px solid rgba(232,121,35,0.1);">
+      <div class="flex items-center gap-4 shrink-0">
+       <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(232,121,35,0.15);">
+        <i data-lucide="smartphone" class="w-6 h-6" style="color: #E87923;"></i>
+       </div>
+       <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: rgba(26,107,74,0.15);">
+        <i data-lucide="share-2" class="w-6 h-6" style="color: #1a6b4a;"></i>
+       </div>
+      </div>
+      <div>
+       <h3 class="font-heading font-bold text-lg mb-1" style="color: #2D2416;">+ Kênh bán hàng trực tuyến</h3>
+       <p class="text-sm" style="color: #7A6F66;">Thiết lập Fanpage, TikTok hoàn chỉnh — quản lý qua hệ thống Google Drive chuyên nghiệp</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Why Us Section -->
+   <section id="why-us" class="relative py-20 sm:py-28" style="background: #F5F1ED;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4" style="background: rgba(26,107,74,0.15); color: #1a6b4a;">TẠI SAO CHỌN DX-HUB</span>
+      <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4" style="color: #2D2416;">Khác biệt tạo nên giá trị</h2>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="reveal rounded-2xl p-8 relative overflow-hidden group" style="background: linear-gradient(180deg, rgba(232,121,35,0.1), rgba(232,121,35,0.02)); border: 1px solid rgba(232,121,35,0.15);">
+       <div class="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10" style="background: radial-gradient(circle, #E87923, transparent); transform: translate(30%, -30%);"></div>
+       <div class="w-14 h-14 rounded-xl mb-6 flex items-center justify-center" style="background: rgba(232,121,35,0.15);">
+        <i data-lucide="piggy-bank" class="w-7 h-7" style="color: #E87923;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-3" style="color: #2D2416;">Chi phí siêu tiết kiệm</h3>
+       <p class="text-sm leading-relaxed" style="color: #7A6F66;">Thay vì hàng chục triệu thuê Agency, bà con được hỗ trợ với mức giá trợ giá tối đa nhờ tận dụng nguồn lực sinh viên thực tập.</p>
+       <div class="mt-4 flex items-center gap-2 text-xs font-medium" style="color: #E87923;">
+        <i data-lucide="trending-down" class="w-4 h-4"></i> Giảm 80% chi phí so với Agency
+       </div>
+      </div>
+      <div class="reveal rounded-2xl p-8 relative overflow-hidden group" style="background: linear-gradient(180deg, rgba(26,107,74,0.1), rgba(26,107,74,0.02)); border: 1px solid rgba(26,107,74,0.15);">
+       <div class="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10" style="background: radial-gradient(circle, #1a6b4a, transparent); transform: translate(30%, -30%);"></div>
+       <div class="w-14 h-14 rounded-xl mb-6 flex items-center justify-center" style="background: rgba(26,107,74,0.15);">
+        <i data-lucide="camera" class="w-7 h-7" style="color: #1a6b4a;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-3" style="color: #2D2416;">Đồng kiến tạo</h3>
+       <p class="text-sm leading-relaxed" style="color: #7A6F66;">Sinh viên xuống tận cơ sở "cầm tay chỉ việc", hướng dẫn bà con tự chụp ảnh, tự đăng bài. Không "làm hộ" rồi bỏ đó.</p>
+       <div class="mt-4 flex items-center gap-2 text-xs font-medium" style="color: #1a6b4a;">
+        <i data-lucide="camera" class="w-4 h-4"></i> Tự chụp &amp; đăng bài
+       </div>
+      </div>
+      <div class="reveal rounded-2xl p-8 relative overflow-hidden group" style="background: linear-gradient(180deg, rgba(255,215,0,0.1), rgba(255,215,0,0.02)); border: 1px solid rgba(255,215,0,0.15);">
+       <div class="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10" style="background: radial-gradient(circle, #FFD700, transparent); transform: translate(30%, -30%);"></div>
+       <div class="w-14 h-14 rounded-xl mb-6 flex items-center justify-center" style="background: rgba(255,215,0,0.15);">
+        <i data-lucide="heart" class="w-7 h-7" style="color: #FFD700;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-3" style="color: #2D2416;">Thấu hiểu bản sắc</h3>
+       <p class="text-sm leading-relaxed" style="color: #7A6F66;">Sinh viên thiết kế tại địa phương đưa họa tiết dân tộc Thái, Mông, Dao vào logo, bao bì tự nhiên và thương mại cao nhất.</p>
+       <div class="mt-4 flex items-center gap-2 text-xs font-medium" style="color: #FFD700;">
+        <i data-lucide="sparkles" class="w-4 h-4"></i> Bản sắc Tây Bắc chính hiệu
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Impact / Stats Section -->
+   <section id="impact" class="relative py-20 sm:py-28" style="background: linear-gradient(180deg, #EBE5DF, #F5F1ED);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4" style="background: rgba(255,215,0,0.15); color: #FFD700;">TÁC ĐỘNG KÉP</span>
+      <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4" style="color: #2D2416;">Giá trị cho cộng đồng</h2>
+      <p class="text-base sm:text-lg max-w-3xl mx-auto" style="color: #7A6F66;">Thúc đẩy bình đẳng giới, nâng cao quyền năng kinh tế cho Phụ nữ dân tộc thiểu số, đồng thời tạo "thao trường" thực chiến cho sinh viên</p>
+     </div>
+     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
+      <div class="stat-card reveal rounded-2xl p-6 text-center" style="background: rgba(232,121,35,0.08); border: 1px solid rgba(232,121,35,0.15);">
+       <div class="text-3xl sm:text-4xl font-black mb-2" style="color: #E87923;" id="stat-1">
+        10+
+       </div>
+       <div class="text-xs sm:text-sm" style="color: #7A6F66;">
+        Doanh nghiệp<br>
+         đã hỗ trợ
+       </div>
+      </div>
+      <div class="stat-card reveal rounded-2xl p-6 text-center" style="background: rgba(26,107,74,0.08); border: 1px solid rgba(26,107,74,0.15);">
+       <div class="text-3xl sm:text-4xl font-black mb-2" style="color: #1a6b4a;">
+        100%
+       </div>
+       <div class="text-xs sm:text-sm" style="color: #7A6F66;">
+        Sản phẩm đã<br>
+         bàn giao thực tế
+       </div>
+      </div>
+      <div class="stat-card reveal rounded-2xl p-6 text-center" style="background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.15);">
+       <div class="text-3xl sm:text-4xl font-black mb-2" style="color: #FFD700;">
+        2x
+       </div>
+       <div class="text-xs sm:text-sm" style="color: #7A6F66;">
+        Tác động kép:<br>
+         Doanh nghiệp + Sinh viên
+       </div>
+      </div>
+      <div class="stat-card reveal rounded-2xl p-6 text-center" style="background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.15);">
+       <div class="text-3xl sm:text-4xl font-black mb-2" style="color: #8B5CF6;">
+        ♀
+       </div>
+       <div class="text-xs sm:text-sm" style="color: #7A6F66;">
+        Nâng cao quyền năng<br>
+         Phụ nữ DTTS
+       </div>
+      </div>
+     </div><!-- Vision -->
+     <div class="reveal rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden" style="background: linear-gradient(135deg, rgba(232,121,35,0.1), rgba(26,107,74,0.1)); border: 1px solid rgba(232,121,35,0.2);">
+      <div class="absolute inset-0 ethnic-pattern"></div>
+      <div class="relative z-10">
+       <div class="ethnic-divider mb-6">
+        <span style="color: #E87923;">◆</span>
+       </div>
+       <p class="font-heading font-bold text-xl sm:text-2xl lg:text-3xl leading-relaxed" style="color: #2D2416;" id="vision-text">"Trở thành HUB uy tín nhất khu vực Tây Bắc, đưa hàng ngàn sản phẩm nông sản, thủ công mỹ nghệ địa phương vươn xa bằng sức mạnh của thiết kế đồ họa và mạng xã hội."</p>
+       <div class="ethnic-divider mt-6">
+        <span style="color: #E87923;">◆</span>
+       </div>
+       <p class="mt-4 text-sm font-semibold" style="color: #E87923;">— Tầm nhìn DX-HUB</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Portfolio / Products Section -->
+   <section id="portfolio" class="relative py-20 sm:py-28" style="background: linear-gradient(180deg, #F5F1ED, #EBE5DF);">
+    <!-- Nội dung sản phẩm sẽ được tự động tải vào đây từ file sanpham.html -->
+   </section>
+   
+   <section id="testimonials" class="relative py-20 sm:py-28" style="background: #F5F1ED;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4" style="background: rgba(232,121,35,0.15); color: #E87923;">KHÁCH HÀNG TIÊU BIỂU</span>
+      <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4" style="color: #2D2416;">Câu chuyện thành công</h2>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="testimonial-card reveal rounded-2xl p-8" style="background: linear-gradient(135deg, rgba(232,121,35,0.08), rgba(232,121,35,0.02)); border: 1px solid rgba(232,121,35,0.15);">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center font-heading font-bold text-lg" style="background: linear-gradient(135deg, #E87923, #FFD700); color: #F5F1ED;">
+         LG
+        </div>
+        <div>
+         <div class="font-bold" style="color: #2D2416;">
+          Lương Gia Trà
+         </div>
+         <div class="text-xs" style="color: #7A6F66;">
+          Sơn La
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-1 mb-3">
+        <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i>
+       </div>
+       <p class="text-sm leading-relaxed" style="color: #6B6260;">"Bộ logo và bao bì mới giúp sản phẩm trà của chúng tôi trông chuyên nghiệp hơn hẳn. Khách hàng tin tưởng hơn và doanh số tăng rõ rệt."</p>
+       <div class="mt-4 flex flex-wrap gap-2">
+        <span class="px-2 py-1 rounded text-xs" style="background: rgba(232,121,35,0.1); color: #E87923;">Logo</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(232,121,35,0.1); color: #E87923;">Bao bì</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(232,121,35,0.1); color: #E87923;">Biển hiệu</span>
+       </div>
+      </div>
+      <div class="testimonial-card reveal rounded-2xl p-8" style="background: linear-gradient(135deg, rgba(26,107,74,0.08), rgba(26,107,74,0.02)); border: 1px solid rgba(26,107,74,0.15);">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center font-heading font-bold text-lg" style="background: linear-gradient(135deg, #1a6b4a, #14533b); color: #F5F1ED;">
+         NQ
+        </div>
+        <div>
+         <div class="font-bold" style="color: #2D2416;">
+          Tiệm Như Quỳnh
+         </div>
+         <div class="text-xs" style="color: #7A6F66;">
+          Sơn La
+         </div>
+        </div>
+       </div>
+       <div class="flex gap-1 mb-3">
+        <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i> <i data-lucide="star" class="w-4 h-4 fill-current" style="color: #FFD700;"></i>
+       </div>
+       <p class="text-sm leading-relaxed" style="color: #6B6260;">"Các bạn sinh viên rất nhiệt tình, xuống tận nơi hướng dẫn cách chụp ảnh sản phẩm và đăng bài lên fanpage. Giờ tôi tự làm được rồi!"</p>
+       <div class="mt-4 flex flex-wrap gap-2">
+        <span class="px-2 py-1 rounded text-xs" style="background: rgba(26,107,74,0.1); color: #1a6b4a;">Logo</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(26,107,74,0.1); color: #1a6b4a;">Fanpage</span> <span class="px-2 py-1 rounded text-xs" style="background: rgba(26,107,74,0.1); color: #1a6b4a;">TikTok</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Process Section -->
+   <section class="relative py-20 sm:py-28" style="background: linear-gradient(180deg, #F5F1ED, #EBE5DF);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16 reveal">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4" style="background: rgba(139,92,246,0.15); color: #8B5CF6;">QUY TRÌNH</span>
+      <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4" style="color: #2D2416;">4 bước đồng kiến tạo</h2>
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="reveal text-center">
+       <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center font-heading font-black text-2xl relative" style="background: rgba(232,121,35,0.15); color: #E87923; border: 2px solid rgba(232,121,35,0.3);">
+        1
+       </div>
+       <h4 class="font-bold mb-2" style="color: #2D2416;">Khảo sát thực địa</h4>
+       <p class="text-sm" style="color: #7A6F66;">Sinh viên xuống tận cơ sở, tìm hiểu sản phẩm và câu chuyện thương hiệu</p>
+      </div>
+      <div class="reveal text-center">
+       <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center font-heading font-black text-2xl" style="background: rgba(26,107,74,0.15); color: #1a6b4a; border: 2px solid rgba(26,107,74,0.3);">
+        2
+       </div>
+       <h4 class="font-bold mb-2" style="color: #2D2416;">Thiết kế sáng tạo</h4>
+       <p class="text-sm" style="color: #7A6F66;">Đưa họa tiết dân tộc vào logo, bao bì với tính thương mại cao</p>
+      </div>
+      <div class="reveal text-center">
+       <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center font-heading font-black text-2xl" style="background: rgba(255,215,0,0.15); color: #FFD700; border: 2px solid rgba(255,215,0,0.3);">
+        3
+       </div>
+       <h4 class="font-bold mb-2" style="color: #2D2416;">Bàn giao &amp; In ấn</h4>
+       <p class="text-sm" style="color: #7A6F66;">File thiết kế chuẩn, sẵn sàng in ấn và đưa vào sử dụng thực tế</p>
+      </div>
+      <div class="reveal text-center">
+       <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center font-heading font-black text-2xl" style="background: rgba(139,92,246,0.15); color: #8B5CF6; border: 2px solid rgba(139,92,246,0.3);">
+        4
+       </div>
+       <h4 class="font-bold mb-2" style="color: #2D2416;">Đào tạo tự chủ</h4>
+       <p class="text-sm" style="color: #7A6F66;">Hướng dẫn bà con tự chụp ảnh, đăng bài, quản lý kênh bán hàng</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Kisstartup mention -->
+   <section class="relative py-16" style="background: #F5F1ED;">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="reveal rounded-2xl p-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left" style="background: linear-gradient(135deg, rgba(232,121,35,0.06), rgba(139,92,246,0.06)); border: 1px solid rgba(232,121,35,0.1);">
+      <div class="w-16 h-16 rounded-xl flex items-center justify-center shrink-0" style="background: linear-gradient(135deg, #E87923, #8B5CF6);">
+       <i data-lucide="award" class="w-8 h-8" style="color: #F5F1ED;"></i>
+      </div>
+      <div>
+       <h3 class="font-heading font-bold text-lg mb-1" style="color: #2D2416;">Dưới sự cố vấn của Kisstartup</h3>
+       <p class="text-sm" style="color: #7A6F66;">Dự án được triển khai và phát triển dưới sự cố vấn chuyên nghiệp từ hệ sinh thái khởi nghiệp Kisstartup</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="relative py-20 sm:py-28" style="background: linear-gradient(180deg, #EBE5DF, #F5F1ED);">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-12 reveal">
+      <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-4" style="background: rgba(232,121,35,0.15); color: #E87923;">BẮT ĐẦU NGAY</span>
+      <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl mb-4" style="color: #2D2416;">Liên hệ với DX-HUB</h2>
+      <p class="text-base sm:text-lg max-w-2xl mx-auto" style="color: #7A6F66;">Hãy để chúng tôi giúp nâng tầm thương hiệu của bạn. Tư vấn miễn phí!</p>
+     </div>
+     <div class="reveal rounded-2xl p-8 sm:p-10" style="background: rgba(232,121,35,0.05); border: 1px solid rgba(232,121,35,0.15);">
+      <form id="contact-form" class="space-y-6">
+       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+         <label for="name" class="block text-sm font-medium mb-2" style="color: #7A6F66;">Họ và tên</label> <input type="text" id="name" placeholder="Nguyễn Văn A" class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all duration-300" style="background: rgba(45,36,22,0.05); border: 1px solid rgba(232,121,35,0.2); color: #2D2416;" onfocus="this.style.borderColor='#E87923'" onblur="this.style.borderColor='rgba(232,121,35,0.2)'">
+        </div>
+        <div>
+         <label for="phone" class="block text-sm font-medium mb-2" style="color: #7A6F66;">Số điện thoại</label> <input type="tel" id="phone" placeholder="0xxx xxx xxx" class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all duration-300" style="background: rgba(45,36,22,0.05); border: 1px solid rgba(232,121,35,0.2); color: #2D2416;" onfocus="this.style.borderColor='#E87923'" onblur="this.style.borderColor='rgba(232,121,35,0.2)'">
+        </div>
+       </div>
+       <div>
+        <label for="service" class="block text-sm font-medium mb-2" style="color: #7A6F66;">Dịch vụ quan tâm</label> <select id="service" class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all duration-300" style="background: rgba(45,36,22,0.05); border: 1px solid rgba(232,121,35,0.2); color: #2D2416;"> <option value="">Chọn dịch vụ</option> <option value="logo">Thiết kế Logo</option> <option value="packaging">Thiết kế Bao bì</option> <option value="label">Tem nhãn sản phẩm</option> <option value="signage">Biển hiệu cửa hàng</option> <option value="digital">Kênh bán hàng trực tuyến</option> <option value="full">Trọn gói nhận diện thương hiệu</option> </select>
+       </div>
+       <div>
+        <label for="message" class="block text-sm font-medium mb-2" style="color: #7A6F66;">Mô tả nhu cầu</label> <textarea id="message" rows="4" placeholder="Mô tả sản phẩm và nhu cầu thiết kế của bạn..." class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all duration-300 resize-none" style="background: rgba(45,36,22,0.05); border: 1px solid rgba(232,121,35,0.2); color: #2D2416;" onfocus="this.style.borderColor='#E87923'" onblur="this.style.borderColor='rgba(232,121,35,0.2)'"></textarea>
+       </div><button type="submit" class="cta-btn w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all duration-300" style="background: linear-gradient(135deg, #E87923, #d06a1a); color: #F5F1ED;" id="submit-btn"> <i data-lucide="send" class="w-5 h-5"></i> <span>Gửi yêu cầu tư vấn</span> </button>
+      </form>
+      <div id="form-success" class="hidden text-center py-8">
+       <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background: rgba(26,107,74,0.2);">
+        <i data-lucide="check-circle" class="w-8 h-8" style="color: #1a6b4a;"></i>
+       </div>
+       <h3 class="font-heading font-bold text-xl mb-2" style="color: #2D2416;">Cảm ơn bạn!</h3>
+       <p class="text-sm" style="color: #7A6F66;">Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-12" style="background: #E8E0D8; border-top: 1px solid rgba(232,121,35,0.1);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+       <div class="w-10 h-10 rounded-lg flex items-center justify-center font-heading font-black" style="background: linear-gradient(135deg, #E87923, #FFD700); color: #F5F1ED;">
+        SL
+       </div>
+       <div>
+        <div class="font-heading font-bold" style="color: #2D2416;">
+         SheLeads
+        </div>
+        <div class="text-xs" style="color: #7A6F66;">
+         Digital Hub Tây Bắc
+        </div>
+       </div>
+      </div>
+      <div class="text-xs text-center" style="color: #7A6F66;">
+       © 2026 SheLeads Digital Hub. Cố vấn bởi Kisstartup. Tất cả quyền được bảo lưu.
+      </div>
+      <div class="flex items-center gap-4">
+       <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110" style="background: rgba(232,121,35,0.1);" aria-label="Facebook"> <i data-lucide="facebook" class="w-5 h-5" style="color: #E87923;"></i> </a> <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110" style="background: rgba(232,121,35,0.1);" aria-label="Phone"> <i data-lucide="phone" class="w-5 h-5" style="color: #E87923;"></i> </a> <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110" style="background: rgba(232,121,35,0.1);" aria-label="Mail"> <i data-lucide="mail" class="w-5 h-5" style="color: #E87923;"></i> </a>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Default config
+    const defaultConfig = {
+      hero_title: 'SheLeads',
+      hero_subtitle: 'Digital Hub Tây Bắc',
+      cta_text: 'Liên hệ ngay',
+      vision_text: 'Trở thành HUB uy tín nhất khu vực Tây Bắc, đưa hàng ngàn sản phẩm nông sản, thủ công mỹ nghệ địa phương vươn xa bằng sức mạnh của thiết kế đồ họa và mạng xã hội.',
+      background_color: '#F5F1ED',
+      surface_color: '#EBE5DF',
+      text_color: '#2D2416',
+      primary_action_color: '#E87923',
+      secondary_action_color: '#1a6b4a',
+      font_family: 'Be Vietnam Pro',
+      font_size: 16
+    };
+
+    // Element SDK init
+    if (window.elementSdk) {
+      window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const bg = config.background_color || defaultConfig.background_color;
+        const surface = config.surface_color || defaultConfig.surface_color;
+        const text = config.text_color || defaultConfig.text_color;
+        const primary = config.primary_action_color || defaultConfig.primary_action_color;
+        const secondary = config.secondary_action_color || defaultConfig.secondary_action_color;
+        const font = config.font_family || defaultConfig.font_family;
+        const fontSize = config.font_size || defaultConfig.font_size;
+
+        // Background
+        document.body.style.backgroundColor = bg;
+        document.body.style.color = text;
+
+        // Font
+        const fontStack = `${font}, 'Be Vietnam Pro', sans-serif`;
+        document.body.style.fontFamily = fontStack;
+        document.body.style.fontSize = `${fontSize}px`;
+
+        // Text content
+        const heroTitle = document.getElementById('hero-title');
+        if (heroTitle) heroTitle.querySelector('.shimmer-text').textContent = config.hero_title || defaultConfig.hero_title;
+
+        const heroSubtitle = document.getElementById('hero-subtitle');
+        if (heroSubtitle) heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+
+        const navTitle = document.getElementById('nav-title');
+        if (navTitle) navTitle.textContent = config.hero_title || defaultConfig.hero_title;
+
+        const ctaText = config.cta_text || defaultConfig.cta_text;
+        const heroCta = document.getElementById('hero-cta');
+        if (heroCta) heroCta.querySelector('span').textContent = ctaText;
+        const navCta = document.getElementById('nav-cta');
+        if (navCta) navCta.textContent = ctaText;
+
+        const visionEl = document.getElementById('vision-text');
+        if (visionEl) visionEl.textContent = `"${config.vision_text || defaultConfig.vision_text}"`;
+
+        // Primary action color
+        const heroCTABtn = document.getElementById('hero-cta');
+        if (heroCTABtn) heroCTABtn.style.background = `linear-gradient(135deg, ${primary}, ${primary}dd)`;
+        const navCTABtn = document.getElementById('nav-cta');
+        if (navCTABtn) navCTABtn.style.background = primary;
+
+        const submitBtn = document.getElementById('submit-btn');
+        if (submitBtn) submitBtn.style.background = `linear-gradient(135deg, ${primary}, ${primary}dd)`;
+
+        // Headings font
+        document.querySelectorAll('.font-heading').forEach(el => {
+          el.style.fontFamily = `'Playfair Display', ${fontStack}`;
+        });
+
+        // Font size scaling
+        document.querySelectorAll('h1').forEach(el => el.style.fontSize = `${fontSize * 3.5}px`);
+        document.querySelectorAll('h2').forEach(el => el.style.fontSize = `${fontSize * 2.5}px`);
+        document.querySelectorAll('h3').forEach(el => el.style.fontSize = `${fontSize * 1.25}px`);
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+        }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+        ['cta_text', config.cta_text || defaultConfig.cta_text],
+        ['vision_text', config.vision_text || defaultConfig.vision_text]
+      ])
+      });
+    }
+
+    // Mobile menu
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-menu').classList.add('hidden');
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      root: document.getElementById('app-root'),
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Counter animation for stats
+    function animateCounter(el, target, suffix = '') {
+      let current = 0;
+      const increment = target / 40;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = Math.floor(current) + suffix;
+      }, 30);
+    }
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const stat1 = document.getElementById('stat-1');
+          if (stat1 && !stat1.dataset.animated) {
+            stat1.dataset.animated = 'true';
+            animateCounter(stat1, 10, '+');
+          }
+        }
+      });
+    }, {
+      root: document.getElementById('app-root'),
+      threshold: 0.5
+    });
+    const s1 = document.getElementById('stat-1');
+    if (s1) statObserver.observe(s1);
+
+    // Form handling
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.classList.add('hidden');
+      document.getElementById('form-success').classList.remove('hidden');
+      // Re-init icons for success state
+      lucide.createIcons();
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const appRoot = document.getElementById('app-root');
+          const targetPosition = target.offsetTop - 80;
+          appRoot.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Load portfolio section from sanpham.html
+    document.addEventListener('DOMContentLoaded', function() {
+      const portfolioSection = document.getElementById('portfolio');
+      if (portfolioSection) {
+          fetch('sanpham.html')
+              .then(response => {
+                  if (!response.ok) { throw new Error('Network response was not ok'); }
+                  return response.text();
+              })
+              .then(data => {
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(data, 'text/html');
+                  const newContent = doc.querySelector('#portfolio');
+                  if (newContent) {
+                      portfolioSection.innerHTML = newContent.innerHTML;
+                      // Re-run the observer for the newly added elements
+                      portfolioSection.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+                  }
+              })
+              .catch(error => {
+                  console.error('Error loading portfolio section:', error);
+                  portfolioSection.innerHTML = '<p class="text-center text-red-500">Lỗi: Không thể tải danh sách sản phẩm.</p>';
+              });
+      }
+    });
+    // Init Lucide
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e2cf2a68296e6d6',t:'MTc3NDU5OTMzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
